@@ -16,7 +16,7 @@
 <body>
   <h1>😎 我的专属AI</h1>
   <div id="chat-box"></div>
-  <input id="input" placeholder="输入你的问题...">
+  <input id="input" placeholder="输入你的问题..." onkeydown="if(event.key=='Enter') send()">
   <button onclick="send()">提问</button>
 
   <script>
@@ -27,7 +27,9 @@
       if (!question) return;
 
       box.innerHTML += `<div class="msg user">${question}</div>`;
+      box.innerHTML += `<div class="msg ai">🤔 思考中...</div>`;
       input.value = "";
+      input.focus();
 
       const res = await fetch("http://127.0.0.1:8000/chat", {
         method: "POST",
@@ -37,7 +39,8 @@
       const data = await res.json();
       const answer = data.data.answer;
 
-      box.innerHTML += `<div class="msg ai">${answer}</div>`;
+      box.innerHTML = box.innerHTML.replace('<div class="msg ai">🤔 思考中...</div>', `<div class="msg ai">${answer}</div>`);
+
       box.scrollTop = box.scrollHeight;
     }
   </script>
