@@ -39,8 +39,7 @@
       const data = await res.json();
       const answer = data.data.answer;
 
-      box.innerHTML = box.innerHTML.replace('<div class="msg ai">🤔 思考中...</div>', `<div class="msg ai">${answer}</div>`);
-
+      box.innerHTML = box.innerHTML.replace(`<div class="msg ai">🤔 思考中...</div>`, `<div class="msg ai">${answer}</div>`);
       box.scrollTop = box.scrollHeight;
     }
   </script>

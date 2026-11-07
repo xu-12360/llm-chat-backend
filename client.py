@@ -14,7 +14,7 @@ class LLMClient:
         self.api_url = "https://open.bigmodel.cn/api/paas/v4/chat/completions"
         self.timeout = 30
 
-    async def chat(self, prompt: str) -> str:
+    async def chat(self, messages: list) -> str:
         """异步调用大模型，返回回答文本"""
         headers = {
             "Authorization": f"Bearer {self.api_key}",
@@ -22,7 +22,7 @@ class LLMClient:
         }
         payload = {
               "model": self.model,
-                "messages": [{"role": "user", "content": prompt}],
+                "messages": messages,
                 }
 
 
